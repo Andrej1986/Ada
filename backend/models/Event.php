@@ -37,11 +37,11 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-            [['date', 'price'], 'required'],
-            [['date'], 'safe'],
+            [['date', 'price', 'name', 'at','category'], 'required'],
+//            [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['name', 'category', 'paid', 'at', 'location'], 'string', 'max' => 255],
             [['day'], 'string', 'max' => 3],
-            [['price'], 'string', 'max' => 100],
+            [['price'], 'number', 'max' => 100],
         ];
     }
 
@@ -52,15 +52,15 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'category' => 'Category',
-            'paid' => 'Paid',
-            'day' => 'Day',
-            'at' => 'At',
-            'location' => 'Location',
-            'date' => 'Date',
-            'price' => 'Price',
+            'name' => 'Názov',
+            'description' => 'Popis',
+            'category' => 'Kategória',
+            'paid' => 'Platené?',
+            'day' => 'Deň',
+            'at' => 'O koľkej',
+            'location' => 'Miesto',
+            'date' => 'Dátum',
+            'price' => 'Cena (eur/h)',
         ];
     }
 

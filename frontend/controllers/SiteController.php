@@ -80,7 +80,7 @@ class SiteController extends Controller
 	{
 		return $this->render('index', [
 			'category'     => new Category(),
-			'dataCategory' => (new Category())->selectCategories(),
+			'dataCategory' => (new Category())->selectUsedCategories(),
 			'paid'         => new Paid(),
 			'dataPaid'     => Paid::findByCategory(),
 			'event'        => new Event(),

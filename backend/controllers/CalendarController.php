@@ -3,10 +3,37 @@
 namespace backend\controllers;
 
 use backend\models\Calendar;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use	yii\helpers\Url;
 
 class CalendarController extends \yii\web\Controller
 {
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'rules' => [
+					[
+						'actions' => ['login', 'error'],
+						'allow' => true,
+					],
+					[
+						'allow' => true,
+						'roles' => ['superadmin'],
+					],
+				],
+			],
+			'verbs' => [
+				'class' => VerbFilter::className(),
+				'actions' => [
+					'logout' => ['post'],
+				],
+			],
+		];
+	}
+
     public function actionIndex($month, $year)
     {
         return $this->render('index', [
@@ -54,6 +81,7 @@ class CalendarController extends \yii\web\Controller
 			$events = $calendar_model->selectEvents($year, $month, $list_day);
 			foreach ($events as $event){
 				$calendar .=  '<br><span>' . $event['name'] . '</span> <br>';
+				$calendar .=  '<span>' . $event['category'] . '</span> <br>';
 				$calendar .=  '<span>' . $event['at'] . '</span> <hr>';
 			}
 //			 var_dump($year);
