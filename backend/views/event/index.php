@@ -1,29 +1,84 @@
 <?php
 
+use kartik\sidenav\SideNav;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\i18n\Formatter;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Event */
-/* @var $form ActiveForm */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title                   = 'Eventy';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="event-index">
 
-    <?php $form = ActiveForm::begin(); ?>
+<div class="col-sm-3" style="margin-top: 135px;">
+	<?=
+	SideNav::widget([
+		'type'    => SideNav::TYPE_DEFAULT,
+		'heading' => 'Options',
+		'items'   => [
+			[
+				'url'   => Url::to(['/name/index']),
+				'label' => 'Názvy Eventov',
+				'icon'  => 'list-alt'
+			],
+            [
+				'url'   => Url::to(['/category/index']),
+				'label' => 'Kategórie',
+				'icon'  => 'wrench'
+			],
+            [
+				'url'   => Url::to(['/location/index']),
+				'label' => 'Miesto',
+				'icon'  => 'home'
+			],
+			[
+				'url'   => Url::to(['/paid/index']),
+				'label' => 'Typy Platieb',
+				'icon'  => 'euro',
+//				'items' => [
+//					['label' => 'About', 'icon' => 'info-sign', 'url' => '#'],
+//					['label' => 'Contact', 'icon' => 'phone', 'url' => '#'],
+//				],
+			],
+		],
+	]);
+	?>
+</div>
+<div class="event-index col-sm-9">
 
-        <?= $form->field($model, 'description') ?>
-        <?= $form->field($model, 'date') ?>
-        <?= $form->field($model, 'price') ?>
-        <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'category') ?>
-        <?= $form->field($model, 'paid') ?>
-        <?= $form->field($model, 'at') ?>
-        <?= $form->field($model, 'location') ?>
-        <?= $form->field($model, 'day') ?>
-    
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        </div>
-    <?php ActiveForm::end(); ?>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-</div><!-- event-index -->
+    <p>
+		<?= Html::a('Vytvoriť Event', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+
+	<?= GridView::widget([
+		'dataProvider' => $dataProvider,
+		'columns'      => [
+			['class' => 'yii\grid\SerialColumn'],
+
+			'id',
+			'name',
+			'description:ntext',
+			'category',
+			'paid',
+			'day',
+			'at',
+			'location',
+			[
+				'attribute' => 'date',
+				'value'     => function ($data) {
+					return \Yii::$app->formatter->asDatetime($data->date, 'php:d-m-Y');
+				},
+			],
+			'price',
+
+			['class' => 'yii\grid\ActionColumn'],
+		],
+	]); ?>
+
+</div>
