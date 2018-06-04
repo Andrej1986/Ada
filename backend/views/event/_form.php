@@ -12,53 +12,49 @@ use yii\widgets\ActiveForm;
 
 <div class="event-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+	<?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->dropDownList($dataName, ['prompt' => '']) ?>
+	<?= $form->field($model, 'name')->dropDownList($dataName, ['prompt' => '']) ?>
 
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+	<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-<!--    --><?//= $form->field($model, 'category')->textInput(['maxlength' => true]) ?>
-<!--    --><?//= $form->field($model, 'category')->dropDownList((new Category())->selectAllCategories(), ['prompt' => '']) ?>
-    <?= $form->field($model, 'category')->dropDownList($dataCategory, ['prompt' => '']) ?>
+	<?= $form->field($model, 'category')->dropDownList($dataCategory, ['prompt' => '']) ?>
 
-    <?= $form->field($model, 'paid')->dropDownList($dataPaid, ['prompt' => '']) ?>
+	<?= $form->field($model, 'paid')->dropDownList($dataPaid, ['prompt' => '']) ?>
 
-<!--    --><?//= $form->field($model, 'day')->textInput(['maxlength' => true]) ?>
-
-<!--    --><?//= $form->field($model, 'at')->textInput(['maxlength' => true]) ?>
-	<?= $form->field($model,'at')->widget(TimePicker::className(), [
-		'language' => 'sk',
-		'mode' => 'time',
+	<?= $form->field($model, 'at')->widget(TimePicker::className(), [
+//		'language'      => 'sk',
+		'mode'          => 'time',
 		'clientOptions' => [
 //			'dateFormat' => 'yy-mm-dd',
 			'timeFormat' => 'HH:mm',
 		]
 	]); ?>
 
-
 	<?= $form->field($model, 'location')->dropDownList($dataLocation, ['prompt' => '']) ?>
 
-
-
-    <!--    <p><strong> Date</strong></p>-->
-	<?= $form->field($model,'date')->widget(TimePicker::className(), [
-		'language' => 'sk',
-		'mode' => 'date',
+	<?= $form->field($model, 'date')->widget(TimePicker::className(), [
+		'language'      => 'sk',
+		'mode'          => 'date',
 		'clientOptions' => [
 			'dateFormat' => 'dd.mm.yy',
 //			'timeFormat' => 'HH:mm:ss',
 		]
-	]);?>
+	]); ?>
 
+    <hr>
+    <label for="repeat-event">Opakovať Event?</label>
+    <input type="checkbox" name="repeat-event" id="repeat-event">&nbsp;
+    <label for="repeat">Koľkokrát?</label>
+    <input type="number" name="repeat" id="repeat" min="1" max="52">
+    <hr>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+		<?= Html::submitButton('Uložiť', ['class' => 'btn btn-success']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

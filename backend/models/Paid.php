@@ -37,7 +37,7 @@ class Paid extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'paid' => 'Paid',
+            'paid' => 'Typy Platieb',
         ];
     }
 }

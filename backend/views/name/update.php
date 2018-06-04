@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Name */
 
-$this->title = 'Update Name: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Names', 'url' => ['index']];
+$this->title = 'Upraviť Názov: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Názvy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Upraviť';
 ?>
 <div class="name-update">
 

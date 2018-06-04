@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\Calendar;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Html;
 use	yii\helpers\Url;
 
 class CalendarController extends \yii\web\Controller
@@ -42,6 +43,10 @@ class CalendarController extends \yii\web\Controller
 
 		]);
     }
+    public function actionTest($month, $year)
+    {
+    	return 'test';
+    }
 
 	public function calendar($month , $year)
 	{
@@ -49,12 +54,12 @@ class CalendarController extends \yii\web\Controller
 		$calendar = '<table cellpadding="0" cellspacing="0" class="table">';
 
 		/* table headings */
-		$headings = array('Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota');
+		$headings = array( 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa');
 		$calendar .= '<tr class="calendar-row"><td class="calendar-day-head">' . implode('</td><td class="calendar-day-head">', $headings) . '</td></tr>';
 
 		/* days and weeks vars now ... */
-		$running_day       = date('w', mktime(0, 0, 0, $month, 1, $year));
-		$days_in_month     = date('t', mktime(0, 0, 0, $month, 1, $year));
+		$running_day       = date('w', mktime(0, 0, 0, $month, 0, $year));
+		$days_in_month     = date('t', mktime(0, 0, 0, $month, 0, $year));
 		$days_in_this_week = 1;
 		$day_counter       = 0;
 		$dates_array       = array();
@@ -127,11 +132,12 @@ class CalendarController extends \yii\web\Controller
 		$month = (int) ($_GET['month'] ?? date('m'));
 		$year = (int)  ($_GET['year'] ?? date('Y'));
 
-
 		/* select month control */
 		$select_month_control = '<select name="month" id="month">';
 		for($x = 1; $x <= 12; $x++) {
-			$select_month_control.= '<option value="'.$x.'" '.($x != $month ? '' : ' selected="selected"').'>'.date('F',mktime(0,0,0,$x,1,$year)).'</option>';
+			$select_month_control.= '<option value="'.$x.'" '.($x != $month ? '' : ' selected="selected"').'>
+			'.date('m',mktime(0,0,0,$x,1,$year)).'
+			</option>';
 		}
 		$select_month_control.= '</select>';
 
@@ -150,7 +156,10 @@ class CalendarController extends \yii\web\Controller
 		$previous_month_link = '<a href="?r=calendar%2Findex&month='.($month != 1 ? $month - 1 : 12).'&year='.($month != 1 ? $year : $year - 1).'" class="control"> << Predchádzajúci Mesiac : </a>';
 
 		/* bringing the controls together */
-		$controls = '<form method="get">'.$select_month_control.$select_year_control.' <input type="submit" name="submit" value="Go" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
+		$controls = '<form method="get"><input type="hidden" name="r" value="calendar">'.$select_month_control.$select_year_control.' <input type="submit" name="submit" value="Potvrdiť" />      '.$previous_month_link.'     '.$next_month_link.' </form>';
+
+//		$controls = '<form method="get">'.$previous_month_link.'     '.$next_month_link.' </form>';
+
 
 		return $controls;
 	}
