@@ -6,7 +6,8 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = 'Kategórie';
+$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['event/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Vytvoriť Kategóriu', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

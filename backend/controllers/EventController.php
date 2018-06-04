@@ -2,8 +2,10 @@
 
 namespace backend\controllers;
 
-use frontend\models\Category;
-use function GuzzleHttp\Psr7\str;
+use backend\models\Name;
+use backend\models\Category;
+use backend\models\Paid;
+use backend\models\Location;
 use Yii;
 use backend\models\Event;
 use yii\data\ActiveDataProvider;
@@ -12,12 +14,24 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * EventController implements the CRUD actions for Event model.
  */
 class EventController extends Controller
 {
+	public $name;
+	public $description;
+	public $category;
+	public $paid;
+	public $at;
+	public $location;
+	public $date;
+	public $repeat_event;
+	public $repeat;
+	public $price;
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -82,19 +96,53 @@ class EventController extends Controller
 	 */
 	public function actionCreate()
 	{
+		if ((new Event())->load(Yii::$app->request->post())) {
+			$request_data       = Yii::$app->request;
+			$this->name         = $request_data->post('Event')['name'];
+			$this->description  = $request_data->post('Event')['description'];
+			$this->category     = $request_data->post('Event')['category'];
+			$this->paid         = $request_data->post('Event')['paid'];
+			$this->at           = $request_data->post('Event')['at'];
+			$this->location     = $request_data->post('Event')['location'];
+			$this->date         = $request_data->post('Event')['date'];
+			$this->repeat_event = $request_data->post('repeat-event');
+			$this->repeat       = $request_data->post('repeat');
+			$this->price        = $request_data->post('Event')['price'];
+
+			if ($this->repeat_event && $this->repeat >= 1) {
+				for ($i = 1; $i <= $this->repeat; $i++) {
+					$model              = new Event();
+					$model->date        = date('Y-m-d', strtotime($this->date));
+					$model->description = $this->description;
+					$model->name        = $this->name;
+					$model->category    = $this->category;
+					$model->paid        = $this->paid;
+					$model->at          = $this->at;
+					$model->location    = $this->location;
+					$model->price       = $this->price;
+
+					$this->date = date('Y-m-d', strtotime($this->date . '+ 7 days'));
+
+					$model->save();
+
+				}
+				if ($model->save()) {
+					return $this->redirect(Url::to(['event/index']));
+				}
+			}
+		}
+
 		$model = new Event();
-
-		if ($model->load(Yii::$app->request->post())) {
-
+		$request_data = Yii::$app->request;
+		if ($model->load($request_data->post())) {
 			$model->date = date('Y-m-d', strtotime($model->date));
-//        	var_dump(Yii::$app->request->post());exit;
 			if ($model->save()) {
 				return $this->redirect(['view', 'id' => $model->id]);
 			}
 		}
 
 		return $this->render('create', [
-			'model'        => $model,
+			'model' => new Event(),
 		]);
 	}
 
@@ -130,6 +178,38 @@ class EventController extends Controller
 		$this->findModel($id)->delete();
 
 		return $this->redirect(['index']);
+	}
+
+	public function actionDeleteMore()
+	{
+		$request_data       = Yii::$app->request;
+		$this->name         = $request_data->post('Event')['name'];
+		$this->category     = $request_data->post('Event')['category'];
+		$this->paid         = $request_data->post('Event')['paid'];
+		$this->at           = $request_data->post('Event')['at'];
+		$this->location     = $request_data->post('Event')['location'];
+		$this->price        = $request_data->post('Event')['price'];
+
+		$models = Event::find()
+			->where(['name'=>$this->name, 'category' => $this->category,
+					 'paid' => $this->paid, 'at' => $this->at,
+					 'location' => $this->location, 'price' => $this->price])->all();
+
+		if ($models){
+			foreach ($models as	$model){
+				$model->delete();
+			}
+
+			return $this->redirect(['event/index']);
+		}
+
+		return $this->render('delete_more', [
+			'model' => new Event(),
+			'dataCategory' => ArrayHelper::map(Category::find()->asArray()->all(), 'name', 'name'),
+			'dataPaid' => ArrayHelper::map(Paid::find()->asArray()->all(), 'paid', 'paid'),
+			'dataName' => ArrayHelper::map(Name::find()->asArray()->all(), 'name', 'name'),
+			'dataLocation' => ArrayHelper::map(Location::find()->asArray()->all(), 'name', 'name'),
+		]);
 	}
 
 	/**

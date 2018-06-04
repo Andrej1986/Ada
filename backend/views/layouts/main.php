@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use http\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -29,26 +30,26 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+//        'brandLabel' => 'Administrácia',
+//        'brandUrl' => yii\helpers\Url::to(['/event/index']),
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+//        ['label' => 'Domov', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Prihlásiť', 'url' => ['/site/login']];
     } else {
 		$menuItems = [
-			['label' => 'Spravovat Eventy', 'url' => ['/event/index']],
-			['label' => 'Calendar', 'url' => ['/calendar/index', 'month'=>date('n', time()), 'year'=>date('Y', time())]],
+			['label' => 'Spravovať Eventy', 'url' => ['/event/index']],
+			['label' => 'Kalendár', 'url' => ['/calendar/index', 'month'=>date('n', time()), 'year'=>date('Y', time())]],
 		];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Odhlásiť (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()

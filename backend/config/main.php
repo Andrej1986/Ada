@@ -42,6 +42,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+		'as access' => [
+			'class' => 'mdm\admin\components\AccessControl',
+			'allowActions' => [
+				'site/*',
+//				'admin/*',
+//				'event/*',
+//				'calendar/*',
+			]
+		],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

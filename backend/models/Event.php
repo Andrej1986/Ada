@@ -37,7 +37,7 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-            [['date', 'price', 'name', 'at','category'], 'required'],
+            [['date', 'price', 'name', 'at','category', 'paid', 'location'], 'required'],
 //            [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['name', 'category', 'paid', 'at', 'location'], 'string', 'max' => 255],
             [['day'], 'string', 'max' => 3],

@@ -1,8 +1,8 @@
 <?php
 
 use backend\models\Name;
-use frontend\models\Category;
-use frontend\models\Paid;
+use backend\models\Category;
+use backend\models\Paid;
 use backend\models\Location;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -12,7 +12,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Event */
 
 $this->title = 'Vytvoriť Event';
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-create">

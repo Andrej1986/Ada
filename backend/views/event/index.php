@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?=
 	SideNav::widget([
 		'type'    => SideNav::TYPE_DEFAULT,
-		'heading' => 'Options',
+		'heading' => 'Ďalšie Možnosti',
 		'items'   => [
 			[
 				'url'   => Url::to(['/name/index']),
@@ -43,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
 //					['label' => 'Contact', 'icon' => 'phone', 'url' => '#'],
 //				],
 			],
+			[
+				'url'   => Url::to(['/admin']),
+				'label' => 'Nastavnie Admina',
+				'icon'  => 'user'
+			],
 		],
 	]);
 	?>
@@ -53,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 		<?= Html::a('Vytvoriť Event', ['create'], ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Vymazať súbor Eventov', ['delete-more'], ['class' => 'btn btn-warning']) ?>
     </p>
 
 
