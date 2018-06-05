@@ -10,10 +10,10 @@ use backend\models\Location;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Event */
 
-$this->title = 'Update Event: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->title = 'Upraviť Event: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Upraviť';
 ?>
 <div class="event-update">
 

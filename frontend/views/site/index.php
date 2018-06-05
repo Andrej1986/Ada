@@ -40,8 +40,7 @@ $this->title = 'Eventy pre deti';
 
 	<?php
 	$this->registerJs("
-
-
+	
 function getFilteredEvents(){
     let category = $('.category select :selected').text(),
         paid = $('.paid select :selected').text(),

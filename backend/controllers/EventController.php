@@ -120,6 +120,8 @@ class EventController extends Controller
 					$model->at          = $this->at;
 					$model->location    = $this->location;
 					$model->price       = $this->price;
+					$model->day = $model->tranformEnglishDaysToSlovak(date('D', strtotime($this->date))) ;
+
 
 					$this->date = date('Y-m-d', strtotime($this->date . '+ 7 days'));
 
@@ -136,6 +138,8 @@ class EventController extends Controller
 		$request_data = Yii::$app->request;
 		if ($model->load($request_data->post())) {
 			$model->date = date('Y-m-d', strtotime($model->date));
+			$model->day = $model->tranformEnglishDaysToSlovak(date('D', strtotime($model->date))) ;
+
 			if ($model->save()) {
 				return $this->redirect(['view', 'id' => $model->id]);
 			}
