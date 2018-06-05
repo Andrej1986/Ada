@@ -148,7 +148,7 @@ class SiteController extends Controller
 	}
 
 	/**
-	 * Displays about page.
+	 * Displays schedule page.
 	 *
 	 * @return mixed
 	 */
@@ -156,6 +156,18 @@ class SiteController extends Controller
 	{
 		return $this->render('schedule', [
 			'events' => Event::find()->asArray()->where(['>', 'date', new Expression('NOW()')])->limit(20)->orderBy('date')->all(),
+		]);
+	}
+
+	/**
+	 * Displays event page.
+	 *
+	 * @return mixed
+	 */
+	public function actionEvent($name)
+	{
+		return $this->render('event', [
+			'event' => \backend\models\Name::findOne(['name' => $name]),
 		]);
 	}
 

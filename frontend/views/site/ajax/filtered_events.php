@@ -1,6 +1,8 @@
 
-<?php foreach ( $events as  $event): ?>
-    <h3> <?= $event?></h3>
+<?php use yii\helpers\Url;
+
+foreach ($events as $event): ?>
+    <h2> <a href="<?= Url::to(['/site/event', 'name' => $event]) ?>"><?= $event ?></a></h2>
 <?php endforeach;?>
 
 <?php if (!$events):?>
