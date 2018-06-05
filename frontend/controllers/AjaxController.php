@@ -127,9 +127,11 @@ class AjaxController extends Controller
 
 			if ($category === 'Všetky' || $paid === 'Všetky') {
 				$when_values = ArrayHelper::map(Event::find()->asArray()->distinct()->all(), 'id', 'day');
+				$when_values[] = 'Všetky';
+
 			}
 
-			$when_values[] = 'Všetky';
+
 			$when_values = array_unique($when_values);
 
 			if ($element = array_search($when, $when_values)) {

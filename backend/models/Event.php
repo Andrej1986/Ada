@@ -71,4 +71,17 @@ class Event extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Comment::className(), ['event_id' => 'id']);
     }
+
+	public function tranformEnglishDaysToSlovak($day)
+	{
+		if ($day == 'Mon'){return 'Po';}
+		if ($day == 'Tue'){return 'Ut';}
+		if ($day == 'Wed'){return 'St';}
+		if ($day == 'Thu'){return 'Št';}
+		if ($day == 'Fri'){return 'Pi';}
+		if ($day == 'Sat'){return 'So';}
+		if ($day == 'Sun'){return 'Ne';}
+
+		return $day;
+    }
 }
