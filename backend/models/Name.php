@@ -26,7 +26,7 @@ class Name extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'description'], 'required'],
             [['name'], 'string', 'max' => 200],
         ];
     }
@@ -39,6 +39,7 @@ class Name extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Názov',
+            'description' => 'Popis',
         ];
     }
 }
