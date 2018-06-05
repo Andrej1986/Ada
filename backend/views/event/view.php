@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Event */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-view">
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Upraviť', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Vymazať', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
