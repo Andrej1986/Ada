@@ -6,6 +6,7 @@ use frontend\models\Event;
 use frontend\models\Paid;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\db\Expression;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -151,9 +152,11 @@ class SiteController extends Controller
 	 *
 	 * @return mixed
 	 */
-	public function actionAbout()
+	public function actionSchedule()
 	{
-		return $this->render('about');
+		return $this->render('schedule', [
+			'events' => Event::find()->asArray()->where(['>', 'date', new Expression('NOW()')])->limit(20)->orderBy('date')->all(),
+		]);
 	}
 
 	/**
