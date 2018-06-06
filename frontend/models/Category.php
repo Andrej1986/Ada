@@ -19,9 +19,14 @@ class Category extends ActiveRecord
 		];
 	}
 
-	public function selectCategories()
+	public function selectUsedCategories()
 	{
 		$categories =  ArrayHelper::map(Event::find()->asArray()->distinct()->all(), 'id', 'category');
 		return array_unique($categories);
+	}
+
+	public function selectAllCategories()
+	{
+		return $categories =  ArrayHelper::map(self::find()->asArray()->all(), 'id', 'name');
 	}
 }

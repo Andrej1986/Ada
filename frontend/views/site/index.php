@@ -34,14 +34,13 @@ $this->title = 'Eventy pre deti';
 
     <div class="all-events">
 		<?php foreach ($dataEvent as $event): ?>
-            <div class="col-sm-6"><h2><?= $event ?></h2></div>
+            <div class="col-sm-6"><h2><a href="<?= Url::to(['event', 'name' => $event]) ?>"><?= $event ?></a></h2></div>
 		<?php endforeach; ?>
     </div>
 
 	<?php
 	$this->registerJs("
-
-
+	
 function getFilteredEvents(){
     let category = $('.category select :selected').text(),
         paid = $('.paid select :selected').text(),

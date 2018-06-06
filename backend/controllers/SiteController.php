@@ -1,11 +1,15 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\Name;
+use common\models\UploadForm;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -22,13 +26,12 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'logout'],
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['superadmin'],
                     ],
                 ],
             ],
@@ -71,12 +74,12 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['/event/index']);
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['event/index']);
         } else {
             $model->password = '';
 
@@ -97,4 +100,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+
 }

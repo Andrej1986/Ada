@@ -36,6 +36,12 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+		'urlManagerBackend' => [
+			'class' => 'yii\web\urlManager',
+			'baseUrl' => '/Ada/backend/web/',
+//			'enablePrettyUrl' => true,
+//			'showScriptName' => false,
+		],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

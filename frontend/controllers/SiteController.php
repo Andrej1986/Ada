@@ -6,6 +6,7 @@ use frontend\models\Event;
 use frontend\models\Paid;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\db\Expression;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -80,7 +81,7 @@ class SiteController extends Controller
 	{
 		return $this->render('index', [
 			'category'     => new Category(),
-			'dataCategory' => (new Category())->selectCategories(),
+			'dataCategory' => (new Category())->selectUsedCategories(),
 			'paid'         => new Paid(),
 			'dataPaid'     => Paid::findByCategory(),
 			'event'        => new Event(),
@@ -147,13 +148,30 @@ class SiteController extends Controller
 	}
 
 	/**
-	 * Displays about page.
+	 * Displays schedule page.
 	 *
 	 * @return mixed
 	 */
-	public function actionAbout()
+	public function actionSchedule()
 	{
-		return $this->render('about');
+		return $this->render('schedule', [
+			'events' => Event::find()->asArray()->where(['>', 'date', new Expression('NOW()')])->limit(20)->orderBy('date')->all(),
+		]);
+	}
+
+	/**
+	 * Displays event page.
+	 *
+	 * @return mixed
+	 */
+	public function actionEvent($name)
+	{
+		return $this->render('event', [
+			'event'  => \backend\models\Name::findOne(['name' => $name]),
+			'images' => \yii\helpers\FileHelper::findFiles('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name", ['only' => ['*.jpg', '*.png']]),
+			'name'   => $name,
+			'i' => 0,
+		]);
 	}
 
 	/**

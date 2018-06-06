@@ -26,7 +26,9 @@ return [
 			'class' => 'mdm\admin\components\AccessControl',
 			'allowActions' => [
 				'site/*',
-				'admin/*',
+//				'admin/*',
+//				'event/*',
+//				'calendar/*',
 			]
 		],
 	],
