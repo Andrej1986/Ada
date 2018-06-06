@@ -17,18 +17,20 @@ $this->title = $event['name'];
 
     <p><?= $event['description'] ?></p>
     <!--	--><?php //var_dump($images) ?>
-	<?php foreach ($images as $image): ?>
-		<?php
-        $i++;
-		$explodeImg = explode('/', $image);
-		$imgName    = end($explodeImg);
-		echo Html::img("/Ada/backend/web/uploads/$name/" . $imgName, ['class' => 'pull-left img-responsive col-sm-6']);
-		?>
-		<?php if ($i % 2 == '0'): ?>
-            <div class="clearfix"></div>
-            <hr>
-		<?php endif; ?>
-	<?php endforeach; ?>
+    <?php if (!empty($images)):?>
+		<?php foreach ($images as $image): ?>
+			<?php
+			$i++;
+			$explodeImg = explode('/', $image);
+			$imgName    = end($explodeImg);
+			echo Html::img("/Ada/backend/web/uploads/$name/" . $imgName, ['class' => 'pull-left img-responsive col-sm-6']);
+			?>
+			<?php if ($i % 2 == '0'): ?>
+                <div class="clearfix"></div>
+                <hr>
+			<?php endif; ?>
+		<?php endforeach; ?>
+    <?php endif; ?>
 
 
 </div>

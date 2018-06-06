@@ -54,17 +54,19 @@ class UploadForm extends Model
 
 	public function selectImagesByName($name)
 	{
-		$raw_images = \yii\helpers\FileHelper::findFiles(
-			Yii::$app->basePath . "/web/uploads/$name", ['only' => ['*.jpg', '*.png']]
-		);
-
-		$images = [];
-		foreach ($raw_images as $image) {
-			$explodeImg = explode('/', $image);
-			$imgName    = end($explodeImg);
-			$images[]   = $imgName;
+		if (is_dir(Yii::$app->basePath . "/web/uploads/$name")) {
+			$raw_images = \yii\helpers\FileHelper::findFiles(
+				Yii::$app->basePath . "/web/uploads/$name", ['only' => ['*.jpg', '*.png']]
+			);
+			$images = [];
+			foreach ($raw_images as $image) {
+				$explodeImg = explode('/', $image);
+				$imgName    = end($explodeImg);
+				$images[]   = $imgName;
+			}
 		}
-		return $images;
+
+		return $images??'';
 	}
 
 	public function deleteByName($image_name, $directory_name)
