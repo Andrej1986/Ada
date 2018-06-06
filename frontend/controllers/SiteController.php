@@ -167,7 +167,10 @@ class SiteController extends Controller
 	public function actionEvent($name)
 	{
 		return $this->render('event', [
-			'event' => \backend\models\Name::findOne(['name' => $name]),
+			'event'  => \backend\models\Name::findOne(['name' => $name]),
+			'images' => \yii\helpers\FileHelper::findFiles('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name", ['only' => ['*.jpg', '*.png']]),
+			'name'   => $name,
+			'i' => 0,
 		]);
 	}
 

@@ -48,6 +48,19 @@ $this->params['breadcrumbs'][] = $this->title;
 				'label' => 'Nastavnie Admina',
 				'icon'  => 'user'
 			],
+//			[
+//				'url'   => Url::to(['/site/upload']),
+//				'label' => 'Fotky',
+//				'icon'  => 'camera'
+//			],
+			[
+				'label' => 'Fotky',
+				'icon'  => 'camera',
+				'items' => [
+					['label' => 'Nahrať', 'url' => Url::to(['/files/upload'])],
+					['label' => 'Vymazať', 'url' => Url::to(['/files/delete'])],
+				],
+			],
 		],
 	]);
 	?>
