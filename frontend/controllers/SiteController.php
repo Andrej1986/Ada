@@ -2,11 +2,13 @@
 
 namespace frontend\controllers;
 
+use backend\models\Name;
 use frontend\models\Event;
 use frontend\models\Paid;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\db\Expression;
+use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -166,8 +168,15 @@ class SiteController extends Controller
 	 */
 	public function actionEvent($name)
 	{
+		if (is_dir('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name")) {
+			$images = FileHelper::findFiles('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name", ['only' => ['*.jpg', '*.png']]);
+		}
+
 		return $this->render('event', [
-			'event' => \backend\models\Name::findOne(['name' => $name]),
+			'event' => Name::findOne(['name' => $name]),
+			'images' => $images ?? '',
+			'name'  => $name,
+			'i'     => 0,
 		]);
 	}
 
