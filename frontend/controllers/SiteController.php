@@ -3,10 +3,13 @@
 namespace frontend\controllers;
 
 use backend\models\Name;
+use common\models\Comment;
 use frontend\models\Event;
 use frontend\models\Paid;
 use Yii;
 use yii\base\InvalidParamException;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\db\Expression;
 use yii\helpers\FileHelper;
 use yii\web\BadRequestHttpException;
@@ -168,15 +171,24 @@ class SiteController extends Controller
 	 */
 	public function actionEvent($name)
 	{
+		$event = Name::findOne(['name' => $name]);
+
+		$query = Comment::find()->where(['name_id' => $event['id']]);
+		$pagination = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 2]);
+
 		if (is_dir('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name")) {
 			$images = FileHelper::findFiles('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name", ['only' => ['*.jpg', '*.png']]);
 		}
 
 		return $this->render('event', [
-			'event' => Name::findOne(['name' => $name]),
+			'event' => $event,
 			'images' => $images ?? '',
 			'name'  => $name,
 			'i'     => 0,
+			'model' => new Comment(),
+//			'comments' => Comment::find()->asArray()->where(['name_id' => $event['id']])->all(),
+			'comments' => $query->offset($pagination->offset)->limit($pagination->limit)->all(),
+			'pagination' => $pagination
 		]);
 	}
 
