@@ -16,13 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Upraviť', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Uložiť', ['delete', 'id' => $model->id], [
+        <?= Html::a('Vymazať', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Naozaj chcete vymazať tento záznam?',
                 'method' => 'post',
             ],
         ]) ?>
+
     </p>
 
     <?= DetailView::widget([
@@ -34,4 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+
+	<?php 			$explodeImg = explode('/', $image[0]);
+	$imgName    = end($explodeImg);
+	echo Html::img("/Ada/backend/web/uploads/main/$model->name/" . $imgName, ['class' => 'pull-left img-responsive col-sm-6']);
+	?>
 </div>

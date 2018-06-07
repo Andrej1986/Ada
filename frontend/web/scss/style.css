@@ -1,0 +1,241 @@
+.show {
+  display: block !important; }
+
+.hide {
+  display: none !important; }
+
+.visible {
+  opacity: 1 !important; }
+
+.invisible {
+  opacity: 0 !important; }
+
+nav {
+  background-color: #7055b2; }
+
+nav li a {
+  color: white; }
+
+nav li a:hover {
+  color: #fff9ac; }
+
+#logo {
+  position: absolute;
+  left: 0; }
+
+.w-100 {
+  width: 40% !important; }
+
+.d-block {
+  display: inline-block !important;
+  float: right; }
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: #000; }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, p, .p {
+  color: #222; }
+
+.carousel-caption {
+  width: 40%;
+  left: 10%;
+  top: 0;
+  bottom: auto;
+  right: auto;
+  font-size: 12px;
+  text-align: left; }
+
+.carousel-caption h3 {
+  color: #7055b2; }
+
+.carousel-indicators .active {
+  background-color: #222; }
+
+.carousel-indicators li {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+.carousel-control-prev, .carousel-control-next {
+  width: 5%; }
+
+#contact {
+  margin-bottom: 35px; }
+
+#section-1 {
+  width: 1000px;
+  margin: 150px auto;
+  position: relative;
+  overflow: hidden; }
+
+#section-1 h4 {
+  position: absolute;
+  top: 10px;
+  left: 400px;
+  z-index: 1;
+  font-weight: bolder; }
+
+#triangle-left {
+  width: 0;
+  height: 0;
+  border-left: 1000px solid #c4acff;
+  border-bottom: 500px solid transparent;
+  margin-top: -500px;
+  position: relative; }
+
+#triangle-right {
+  width: 0;
+  height: 0;
+  border-bottom: 500px solid #fff9ac;
+  border-left: 1000px solid transparent;
+  position: relative;
+  margin-left: -1500px; }
+
+.reveal-on-scroll {
+  animation-name: show-backend;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  /* Safari 4.0 - 8.0 */
+  /* Standard syntax */
+  margin-left: 0 !important; }
+@-webkit-keyframes show-backend {
+  from {
+    margin-left: 1500px; }
+  to {
+    margin-left: 0; } }
+@keyframes show-backend {
+  from {
+    margin-left: 1500px; }
+  to {
+    margin-left: 0; } }
+#triangle-left h5 {
+  position: absolute;
+  top: 50px;
+  left: -950px;
+  z-index: 1;
+  color: #fff9ac; }
+
+#triangle-left pre {
+  position: absolute;
+  left: -950px;
+  top: 100px;
+  z-index: 1;
+  font-family: "Times New Roman", Georgia, sans-serif; }
+
+#triangle-right h5 {
+  position: absolute;
+  top: 150px;
+  left: -134px;
+  z-index: 1;
+  color: #c4acff; }
+
+#triangle-right pre {
+  position: absolute;
+  left: -750px;
+  top: 200px;
+  z-index: 1;
+  text-align: right;
+  font-family: "Times New Roman", Georgia, sans-serif; }
+
+#triangle-right pre span {
+  margin-right: 250px; }
+
+#section-2 {
+  width: 1000px;
+  margin: 150px auto;
+  position: relative; }
+
+#oval {
+  width: 1000px;
+  height: 350px;
+  background: #fff9ac;
+  -moz-border-radius: 1000px / 350px;
+  -webkit-border-radius: 1000px / 350px;
+  border-radius: 1000px / 350px;
+  position: relative; }
+  #oval ul {
+    list-style: none;
+    height: 60px;
+    line-height: 60px;
+    padding-left: 25%;
+    position: absolute;
+    z-index: 1;
+    top: -17px;
+    left: 0; }
+    #oval ul li {
+      float: left;
+      margin-left: 10px; }
+      #oval ul li a {
+        text-decoration: none;
+        padding: 10px 20px;
+        color: #555;
+        font-weight: bolder;
+        cursor: pointer; }
+      #oval ul li a:hover {
+        color: #bbb; }
+      #oval ul li .active {
+        color: #aaa; }
+
+#oval p {
+  width: 500px;
+  padding-top: 100px;
+  margin: 0 auto;
+  font-family: "Times New Roman", serif;
+  display: none; }
+
+#section-3 {
+  margin-bottom: 150px;
+  height: 500px; }
+  #section-3 h4 {
+    text-align: center;
+    color: #444;
+    font-weight: bolder; }
+  #section-3 .circles {
+    width: 1010px;
+    margin: 0 auto; }
+
+.circle, .circle2, .circle3, .circle4 {
+  width: 250px;
+  height: 250px;
+  background: #c4acff;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 150px;
+  display: inline-block;
+  margin-right: 125px;
+  margin-top: 20px;
+  position: relative; }
+  .circle h5, .circle2 h5, .circle3 h5, .circle4 h5 {
+    position: absolute;
+    z-index: 10;
+    top: 45%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff; }
+
+.circle:hover, .circle2:hover, .circle3:hover, .circle4:hover {
+  background: #fff9ac;
+  cursor: pointer; }
+
+.circle:hover h5, .circle2:hover h5, .circle3:hover h5, .circle4:hover h5 {
+  color: #bbb; }
+
+.circle {
+  top: 200px;
+  left: 300px; }
+
+.circle2 {
+  top: 200px; }
+
+.circle3 {
+  top: -200px;
+  left: 300px; }
+
+.circle4 {
+  top: -200px; }
+
+footer {
+  height: 40px;
+  line-height: 40px;
+  background-color: #7055b2; }
+
+/*# sourceMappingURL=style.css.map */

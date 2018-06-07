@@ -31,6 +31,9 @@ class AjaxController extends Controller
 							'category' => $category,
 							'day'      => $when
 						])->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid === 'Všetky' && $category !== 'Všetky' && $when !== 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
@@ -39,6 +42,9 @@ class AjaxController extends Controller
 							'category' => $category,
 							'day'      => $when
 						])->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid === 'Všetky' && $category === 'Všetky' && $when !== 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
@@ -46,10 +52,16 @@ class AjaxController extends Controller
 						->where([
 							'day' => $when
 						])->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid === 'Všetky' && $category === 'Všetky' && $when === 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
 					'events' => array_unique(ArrayHelper::map(Event::find()->asArray()->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid === 'Všetky' && $category !== 'Všetky' && $when === 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
@@ -58,6 +70,9 @@ class AjaxController extends Controller
 							'category' => $category,
 						])
 						->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid !== 'Všetky' && $category !== 'Všetky' && $when === 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
@@ -67,6 +82,9 @@ class AjaxController extends Controller
 							'paid'     => $paid,
 						])
 						->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid !== 'Všetky' && $category === 'Všetky' && $when === 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
@@ -75,6 +93,9 @@ class AjaxController extends Controller
 							'paid' => $paid,
 						])
 						->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			} elseif ($paid !== 'Všetky' && $category === 'Všetky' && $when !== 'Všetky') {
 				return $this->renderPartial('/site/ajax/filtered_events', [
@@ -84,6 +105,9 @@ class AjaxController extends Controller
 							'day' => $when,
 						])
 						->all(), 'id', 'name')),
+					'paid'     => $paid,
+					'category' => $category,
+					'day'      => $when
 				]);
 			}
 		}
@@ -109,11 +133,10 @@ class AjaxController extends Controller
 				'category'    => $paid_values,
 				'paid'        => new Paid(),
 				'paid_value'  => $paid,
-				'dataPaid'    => Paid::findByCategory(),
-				'paid_values' => $paid_values,
-				'element' => $element
 			]);
 		}
+
+		return 'paid fail';
 	}
 
 	public function actionSetWhenValues()
@@ -125,12 +148,20 @@ class AjaxController extends Controller
 
 			$when_values = ArrayHelper::map(Event::find()->asArray()->where(['category' => $category, 'paid' => $paid])->distinct()->all(), 'id', 'day');
 
-			if ($category === 'Všetky' || $paid === 'Všetky') {
+			if ($category === 'Všetky' && $paid === 'Všetky'){
 				$when_values = ArrayHelper::map(Event::find()->asArray()->distinct()->all(), 'id', 'day');
-				$when_values[] = 'Všetky';
-
+			}
+			if ($category === 'Všetky' && $paid !== 'Všetky') {
+				$when_values = ArrayHelper::map(Event::find()->asArray()->where(['paid' => $paid])->distinct()->all(), 'id', 'day');
+			}
+			if ($category !== 'Všetky' && $paid === 'Všetky') {
+				$when_values = ArrayHelper::map(Event::find()->asArray()->where(['category' => $category])->distinct()->all(), 'id', 'day');
 			}
 
+
+			if ($when !== 'Všetky') {
+				$when_values[] = 'Všetky';
+			}
 
 			$when_values = array_unique($when_values);
 

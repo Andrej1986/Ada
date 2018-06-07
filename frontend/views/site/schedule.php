@@ -4,10 +4,10 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Rozvrh';
+$this->title = 'Program';
 
 ?>
-<div class="site-about">
+<div class="site-schedule">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <table class="table">
@@ -20,8 +20,10 @@ $this->title = 'Rozvrh';
         </tr>
         </thead>
         <tbody>
+        <?php $i = 0 ?>
 		<?php foreach ($events as $event): ?>
-            <tr>
+            <?php $i++ ?>
+            <tr class="<?php if($i%2=='0'){echo 'table-row-color';} ?>">
                 <td><?= $event['day'] ?></td>
                 <td><?=  date('d.m.Y', strtotime($event['date']))  ?></td>
                 <td><?= $event['name'] ?></td>

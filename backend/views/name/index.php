@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title                   = 'Názvy';
-$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['event/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Globálne Eventy', 'url' => ['event/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="name-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-		<?= Html::a('Vytvoriť Názov', ['create'], ['class' => 'btn btn-success']) ?>
+		<?= Html::a('Vytvoriť Globálny Event', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 	<?= GridView::widget([

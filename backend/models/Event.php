@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $description
  * @property string $category
  * @property string $paid
  * @property string $day
@@ -36,11 +35,10 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'string'],
             [['date', 'price', 'name', 'at','category', 'paid', 'location'], 'required'],
 //            [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['name', 'category', 'paid', 'at', 'location'], 'string', 'max' => 255],
-            [['day'], 'string', 'max' => 3],
+            [['day'], 'string', 'max' => 10],
             [['price'], 'number', 'max' => 100],
         ];
     }
@@ -53,7 +51,6 @@ class Event extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Názov',
-            'description' => 'Popis',
             'category' => 'Kategória',
             'paid' => 'Platené?',
             'day' => 'Deň',
@@ -74,13 +71,13 @@ class Event extends \yii\db\ActiveRecord
 
 	public function tranformEnglishDaysToSlovak($day)
 	{
-		if ($day == 'Mon'){return 'Po';}
-		if ($day == 'Tue'){return 'Ut';}
-		if ($day == 'Wed'){return 'St';}
-		if ($day == 'Thu'){return 'Št';}
-		if ($day == 'Fri'){return 'Pi';}
-		if ($day == 'Sat'){return 'So';}
-		if ($day == 'Sun'){return 'Ne';}
+		if ($day == 'Mon'){return 'Pondelok';}
+		if ($day == 'Tue'){return 'Utorok';}
+		if ($day == 'Wed'){return 'Streda';}
+		if ($day == 'Thu'){return 'Štvrtok';}
+		if ($day == 'Fri'){return 'Piatok';}
+		if ($day == 'Sat'){return 'Sobota';}
+		if ($day == 'Sun'){return 'Nedeľa';}
 
 		return $day;
     }

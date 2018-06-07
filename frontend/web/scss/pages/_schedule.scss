@@ -1,0 +1,13 @@
+.site-schedule{
+  background-color: transparentize($primary-color1, 0.2) ;
+  padding: 5px 60px;
+  border-radius: $border-radius1;
+
+  tbody tr{
+    height: 50px;
+  }
+
+  .table-row-color{
+    background-color: lighten($primary-color2, 5%) ;
+  }
+}
