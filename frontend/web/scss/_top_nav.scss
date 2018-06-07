@@ -1,0 +1,11 @@
+nav.navbar{
+  background-color: darken($primary-color1, 15%)!important;
+  //border-radius: $border-radius1;
+  a{
+    color: darken($primary-color1, 60%)  !important;
+  }
+
+  .active a{
+    background-color: lighten($primary-color2, 10%)  !important;
+  }
+}

@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'items'   => [
 			[
 				'url'   => Url::to(['/name/index']),
-				'label' => 'Názvy Eventov',
+				'label' => 'Globálne Eventy',
 				'icon'  => 'list-alt'
 			],
             [
@@ -48,11 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
 				'label' => 'Nastavnie Admina',
 				'icon'  => 'user'
 			],
-//			[
-//				'url'   => Url::to(['/site/upload']),
-//				'label' => 'Fotky',
-//				'icon'  => 'camera'
-//			],
 			[
 				'label' => 'Fotky',
 				'icon'  => 'camera',
@@ -82,7 +77,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 			'id',
 			'name',
-			'description:ntext',
 			'category',
 			'paid',
 			'day',

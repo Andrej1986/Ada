@@ -43,7 +43,7 @@ $this->title = $event['name'];
 		<?= $form->field($model, 'name_id')->hiddenInput(['value' => $event['id']])->label(false) ?>
 
         <div class="form-group">
-			<?= Html::submitButton('Pridať komentár', ['class' => 'btn btn-success']) ?>
+			<?= Html::submitButton('Pridať komentár', ['class' => 'btn btn-confirm']) ?>
         </div>
 
 		<?php ActiveForm::end(); ?>

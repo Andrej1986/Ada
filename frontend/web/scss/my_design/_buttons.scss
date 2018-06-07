@@ -1,0 +1,11 @@
+.btn-confirm {
+  color: lighten($secondary-color2, 20%);
+  background-color: $secondary-color1;
+  border-color: $secondary-color1;
+  &:hover {
+    color: $secondary-color1;
+    background-color: lighten($secondary-color2, 20%);
+    border-color: lighten($secondary-color2, 20%);
+
+  }
+}

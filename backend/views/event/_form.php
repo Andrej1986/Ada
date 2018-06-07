@@ -16,9 +16,6 @@ use yii\widgets\ActiveForm;
 
 	<?= $form->field($model, 'name')->dropDownList($dataName, ['prompt' => '']) ?>
 
-
-	<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
 	<?= $form->field($model, 'category')->dropDownList($dataCategory, ['prompt' => '']) ?>
 
 	<?= $form->field($model, 'paid')->dropDownList($dataPaid, ['prompt' => '']) ?>

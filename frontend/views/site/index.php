@@ -1,5 +1,6 @@
 <?php
 
+use backend\models\Name;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
@@ -22,21 +23,25 @@ $this->title = 'Eventy pre deti';
 			<?= $form->field($paid, 'paid')->dropDownList($dataPaid, ['onchange' => 'getFilteredEvents(), setWhenValues()', 'prompt' => 'Všetky'])->label('Platené?') ?>
         </div>
         <div class="col-sm-offset-1 col-sm-3 when">
-			<?= $form->field($event, 'name')->dropDownList(['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne'], ['onchange' => 'getFilteredEvents()', 'prompt' => 'Všetky'])->label('Kedy') ?>
+			<?= $form->field($event, 'day')->dropDownList(['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa'], ['onchange' => 'getFilteredEvents()', 'prompt' => 'Všetky'])->label('Kedy') ?>
         </div>
         <div class="clearfix"></div>
     </div>
 
-        <div class="ajax-data"></div>
+    <div class="ajax-data"></div>
 
     <div class="clearfix"></div>
 
 
     <div class="all-events">
 		<?php foreach ($dataEvent as $event): ?>
-            <div class="col-sm-6"><h2><a href="<?= Url::to(['event', 'name' => $event]) ?>"><?= $event ?></a></h2></div>
+            <div class="col-sm-6 event">
+                <h2><a href="<?= Url::to(['/site/event', 'name' => $event]) ?>"><?= $event ?></a></h2>
+                <pre><?= Name::findOne(['name' => $event])->description; ?></pre>
+            </div>
 		<?php endforeach; ?>
     </div>
+    <div class="cleearfix"></div>
 
 	<?php
 	$this->registerJs("
@@ -59,7 +64,6 @@ function getFilteredEvents(){
  function setPaidValues(){
     let category = $('.category select :selected').text(),
             paid = $('.paid select :selected').text();
-    $('.container .paid').empty();
         $.ajax({
            url: \"" . Url::to(['ajax/set-paid-values']) . "\",
            data: {category: category, paid:paid},

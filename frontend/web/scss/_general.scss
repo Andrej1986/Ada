@@ -1,0 +1,40 @@
+body{
+  min-height: 100vh;
+  color: $font-color;
+    background-color: darken(#fff, 0);
+    background-image: url("../images/memphis-colorful.png");
+    //background-repeat: repeat;
+}
+
+pre {
+  margin: 0 auto;
+  width: 80%;
+  background-color: transparent;
+  border: none;
+  font-family: "Times New Roman", sans-serif;
+  line-height: 2em;
+  word-break: keep-all;
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.pagination{
+  li a{
+    background-color: $primary-color2;
+    color: $primary-color1;
+    &:hover{
+      background-color: lighten($primary-color1, 5%) ;
+      color: darken($primary-color2, 5%) ;
+    }
+  }
+
+  li.active a, li.active a:hover{
+    background-color: $primary-color1;
+    color: $primary-color2;
+    border-color: $primary-color2;
+    //color: $secondary-color1;
+    //background-color: $secondary-color2;
+  }
+}

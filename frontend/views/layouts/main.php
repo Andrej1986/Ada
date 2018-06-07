@@ -37,12 +37,12 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Domov', 'url' => ['/site/index']],
-        ['label' => 'Rozvrh', 'url' => ['/site/schedule']],
-        ['label' => 'Eventy', 'url' => ['/site/contact']],
+        ['label' => 'Program', 'url' => ['/site/schedule']],
+//        ['label' => 'Eventy', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Registrácia', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Prihlásenie', 'url' => ['/site/login']];
+//        $menuItems[] = ['label' => 'Registrácia', 'url' => ['/site/signup']];
+//        $menuItems[] = ['label' => 'Prihlásenie', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -69,6 +69,7 @@ AppAsset::register($this);
     </div>
 </div>
 
+<div class="clearfix"></div>
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
