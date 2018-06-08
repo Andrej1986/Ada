@@ -1,6 +1,8 @@
 <?php
 
 use backend\models\Name;
+use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 
@@ -28,18 +30,53 @@ $this->title = 'Eventy pre deti';
         <div class="clearfix"></div>
     </div>
 
-    <div class="ajax-data"></div>
 
     <div class="clearfix"></div>
 
 
     <div class="all-events">
-		<?php foreach ($dataEvent as $event): ?>
-            <div class="col-sm-6 event">
-                <h2><a href="<?= Url::to(['/site/event', 'name' => $event]) ?>"><?= $event ?></a></h2>
-                <pre><?= Name::findOne(['name' => $event])->description; ?></pre>
-            </div>
-		<?php endforeach; ?>
+        <div class="ajax-data">
+			<?php $i = 0; ?>
+			<?php foreach ($dataEvent as $event): ?>
+                <div class="col-sm-6 event">
+                    <h2><a href="<?= Url::to(['/site/event', 'name' => $event]) ?>"><?= $event ?></a></h2>
+                    <pre>
+                        <?php
+						if (strlen(Name::findOne(['name' => $event])->description) >= 200) {
+							$pos = strpos(Name::findOne(['name' => $event])->description, ' ', 200);
+							echo substr(Name::findOne(['name' => $event])->description, 0, $pos) . '...' .
+								Html::a('viac', Url::to(['/site/event/', 'name' => $event]));
+						} else {
+							echo Name::findOne(['name' => $event])->description;
+						}
+						?>
+                    </pre>
+
+						<?php
+						if (is_dir("/Users/andrejsoukup/yii/Ada/backend/web/uploads/main/$event/")) {
+							$image = FileHelper::findFiles("/Users/andrejsoukup/yii/Ada/backend/web/uploads/main/$event/", ['only' => ['*.jpg', '*.png']]) ?? '';
+						} else {
+							$image = '';
+						}
+						?>
+						<?php if (!empty($image)): ?>
+							<?php
+							$explodeImg = explode('/', $image[0]);
+							$imgName    = end($explodeImg);
+							echo Html::img("/Ada/backend/web/uploads/main/$event/" . $imgName, ['class' => 'pull-left img-responsive img-main-page col-sm-6']);
+							?>
+						<?php endif; ?>
+                </div>
+
+				<?php
+				$i++;
+				if ($i % 2 == 0) {
+					echo '<div class="clearfix"></div><hr>';
+				}
+				?>
+
+			<?php endforeach; ?>
+        </div>
     </div>
     <div class="cleearfix"></div>
 
@@ -50,7 +87,6 @@ function getFilteredEvents(){
     let category = $('.category select :selected').text(),
         paid = $('.paid select :selected').text(),
         when = $('.when select :selected').text();
-    $('.all-events').hide();
         $.ajax({
            url: \"" . Url::to(['ajax/filtered-events']) . "\",
            data: {category: category, paid:paid, when:when},

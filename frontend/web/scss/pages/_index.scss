@@ -101,9 +101,9 @@ a.desc:after {
   border: none;
 }
 
-@media(max-width:767px) {
+@media(max-width: 767px) {
   .nav li > form > button.logout {
-    display:block;
+    display: block;
     text-align: left;
     width: 100%;
     padding: 10px 15px;
@@ -121,14 +121,25 @@ a.desc:after {
 
 .event {
   border: 15px solid white;
-  height: 300px;
-  background-color: transparentize($primary-color1, 0.2) ;
+  padding: 20px;
+  height: 600px;
+  background-color: transparentize($primary-color1, 0.2);
 
-  a{
+  a {
     color: $primary-color2;
-    &:hover{
+    &:hover {
       text-decoration: none;
       color: darken($primary-color2, 20%);
     }
+  }
+}
+
+.site-index{
+  .pre{
+    overflow: hidden;
+  }
+  .img-main-page{
+    height: 250px;
+    width: auto;
   }
 }

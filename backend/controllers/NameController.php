@@ -56,14 +56,13 @@ class NameController extends Controller
 	{
 		$model = $this->findModel($id);
 
-//		var_dump(Yii::$app->basePath. "/web/uploads/main/$model->name");exit;
-		if (is_dir(Yii::$app->basePath. "/web/uploads/main/$model->name")) {
+		if (is_dir(Yii::$app->basePath . "/web/uploads/main/$model->name")) {
 			$image = FileHelper::findFiles(Yii::$app->basePath . "/web/uploads/main/$model->name", ['only' => ['*.jpg', '*.png']]);
 		}
-//var_dump($image); exit();
+
 		return $this->render('view', [
 			'model' => $model,
-			'image' => $image
+			'image' => $image??'',
 		]);
 	}
 
@@ -101,11 +100,20 @@ class NameController extends Controller
 		$model = $this->findModel($id);
 
 		if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
+			$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+			if ($model->upload()) {
+				return $this->redirect(['view', 'id' => $model->id]);
+			}
+		}
+
+		if (is_dir(Yii::$app->basePath . "/web/uploads/main/$model->name")) {
+			$image = FileHelper::findFiles(Yii::$app->basePath . "/web/uploads/main/$model->name", ['only' => ['*.jpg', '*.png']]);
 		}
 
 		return $this->render('update', [
 			'model' => $model,
+			'image' => $image ?? '',
 		]);
 	}
 
@@ -121,6 +129,15 @@ class NameController extends Controller
 		$this->findModel($id)->delete();
 
 		return $this->redirect(['index']);
+	}
+
+	public function actionDeleteImage($name, $id)
+	{
+		if (Yii::$app->basePath . '/web/uploads/main/' . $name) {
+			FileHelper::removeDirectory(Yii::$app->basePath . '/web/uploads/main/' . $name);
+		}
+
+		return $this->redirect(['/name/update', 'id' => $id]);
 	}
 
 	/**

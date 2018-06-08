@@ -187,20 +187,13 @@ a.desc:after {
 
 .event {
   border: 15px solid white;
-  padding: 20px;
-  height: 600px;
+  height: 500px;
   background-color: rgba(194, 244, 254, 0.8); }
   .event a {
     color: #ec9ae6; }
     .event a:hover {
       text-decoration: none;
       color: #dc44d1; }
-
-.site-index .pre {
-  overflow: hidden; }
-.site-index .img-main-page {
-  height: 250px;
-  width: auto; }
 
 .site-schedule {
   background-color: rgba(194, 244, 254, 0.8);
