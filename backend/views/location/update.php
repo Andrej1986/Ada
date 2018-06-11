@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Location */
 
 $this->title = 'Upraviť Miesto: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Miesta', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Upraviť';
 ?>

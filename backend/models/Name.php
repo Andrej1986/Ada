@@ -44,6 +44,7 @@ class Name extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Názov',
             'imageFile' => 'Fotka',
+			'description' => 'Popis'
         ];
     }
 

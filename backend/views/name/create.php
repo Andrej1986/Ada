@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Name */
 
-$this->title = 'Vytvoriť Názov';
-$this->params['breadcrumbs'][] = ['label' => 'Názvy', 'url' => ['index']];
+$this->title = 'Vytvoriť Globálny Event';
+$this->params['breadcrumbs'][] = ['label' => 'Globálne Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="name-create">

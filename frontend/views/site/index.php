@@ -40,8 +40,7 @@ $this->title = 'Eventy pre deti';
 			<?php foreach ($dataEvent as $event): ?>
                 <div class="col-sm-6 event">
                     <h2><a href="<?= Url::to(['/site/event', 'name' => $event]) ?>"><?= $event ?></a></h2>
-                    <pre>
-                        <?php
+                    <pre><?php
 						if (strlen(Name::findOne(['name' => $event])->description) >= 200) {
 							$pos = strpos(Name::findOne(['name' => $event])->description, ' ', 200);
 							echo substr(Name::findOne(['name' => $event])->description, 0, $pos) . '...' .

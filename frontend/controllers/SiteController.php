@@ -173,7 +173,7 @@ class SiteController extends Controller
 		$event = Name::findOne(['name' => $name]);
 
 		$query      = Comment::find()->where(['name_id' => $event['id']]);
-		$pagination = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 2]);
+		$pagination = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
 
 		if (is_dir('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name")) {
 			$images = FileHelper::findFiles('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name", ['only' => ['*.jpg', '*.png']]);

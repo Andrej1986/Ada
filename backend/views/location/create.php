@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Location */
 
 $this->title = 'Vytvoriť Miesto';
-$this->params['breadcrumbs'][] = ['label' => 'Locations', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="location-create">

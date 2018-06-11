@@ -6,8 +6,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Name */
 
-$this->title                   = 'Upraviť Názov: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Názvy', 'url' => ['index']];
+$this->title                   = 'Upraviť Globálny Event: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Globálne Eventy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Upraviť';
 ?>

@@ -34,7 +34,7 @@ class Comment extends \yii\db\ActiveRecord
         return [
             [['text'], 'required'],
             [['name_id'], 'integer'],
-            [['text'], 'string'],
+            [['text'], 'string', 'length' => [2, 200]],
             [['time'], 'safe'],
             [['name_id'], 'exist', 'skipOnError' => true, 'targetClass' => Name::className(), 'targetAttribute' => ['name_id' => 'id']],
         ];
