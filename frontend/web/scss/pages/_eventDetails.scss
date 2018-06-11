@@ -1,90 +1,16 @@
-#event-details {
-  .event-details-title-and-description {
-    background-color: $primary-color1;
-    padding: 30px;
-    margin: 30px 0;
+.site-event-details{
+  background-color: transparentize($primary-color1, 0.3) ;
+  padding: 5px 60px;
+  border-radius: $border-radius1;
+
+  ul.pagination{
+    margin-top: 50px;
   }
 
-  .event-details-selects {
-    width: 100%;
-    letter-spacing: 0.5px;
-    background-color: $primary-color2;
-    padding: 20px;
-    border-radius: $border-radius1;
-    margin: 0 0 20px 0;
-    text-align: center;
-    label {
-      font-size: 1.2em;
-      color: $font-color2;
-    }
-    select {
-      background-color: $primary-color2;
-      color: $font-color2;
-      margin-right: 15px;
-      border: 2px lighten($primary-color1, 5%) solid;;
-    }
-    select:hover {
-      background-color: $primary-color1;
-      color: $font-color;
-    }
-  }
-
-  #event-category-chosen {
-    margin: -10px 0 50px 0;
-    h5 {
-      float: left;
-      background-color: $primary-color1;
-      padding: 20px;
-      border-radius: $border-radius1;
-    }
-    div {
-      background-color: $primary-color1;
-      padding: 20px;
-      border-radius: $border-radius1;
-      min-height: 70px;
-    }
-  }
-  #img1, #img2, #img3, #img4 {
-    z-index: 1;
-    width: 70px;
-    position: fixed;
-    opacity: 0.5;
-    border-radius: 100%;
-  }
-
-  #img1 {
-    top: 0%;
-    left: 0%;
-  }
-  #img2 {
-    top: 0%;
-    right: 0%;
-  }
-  #img3 {
-    bottom: 0%;
-    left: 0%;
-  }
-  #img4 {
-    bottom: 0%;
-    right: 0%;
-  }
-
-  .images {
-    background-color: $primary-color2 !important;
-    h5 {
-      width: 100%;
-    }
-
-    .event_images {
-      text-align: center;
-      display: block;
-      width: 100%;
-      img {
-        margin: 20px 0 20px 20px;
-      }
-      .delete_event_image {
-        margin-right: 50px;
-      }
+  pre{
+    margin-top: 30px;
+    &.event-description{
+      font-size: 1.1em;
     }
   }
 }

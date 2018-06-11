@@ -2,7 +2,7 @@ body {
   min-height: 100vh;
   color: #555;
   background-color: white;
-  background-image: url("../images/memphis-colorful.png"); }
+  background-image: url("../images/Sports.png"); }
 
 pre {
   margin: 0 auto;
@@ -10,7 +10,7 @@ pre {
   background-color: transparent;
   border: none;
   font-family: "Times New Roman", sans-serif;
-  line-height: 2em;
+  line-height: 1.5em;
   word-break: keep-all;
   white-space: pre-wrap;
   /* Since CSS 2.1 */
@@ -187,6 +187,7 @@ a.desc:after {
 
 .event {
   border: 15px solid white;
+  border-radius: 20px;
   padding: 20px;
   height: 600px;
   background-color: rgba(194, 244, 254, 0.8); }
@@ -196,11 +197,12 @@ a.desc:after {
       text-decoration: none;
       color: #dc44d1; }
 
-.site-index .pre {
+.site-index pre {
   overflow: hidden; }
 .site-index .img-main-page {
   height: 250px;
-  width: auto; }
+  width: auto;
+  border-radius: 8%; }
 
 .site-schedule {
   background-color: rgba(194, 244, 254, 0.8);
@@ -211,71 +213,16 @@ a.desc:after {
   .site-schedule .table-row-color {
     background-color: #f0b0ec; }
 
-#event-details .event-details-title-and-description {
-  background-color: #c2f4fe;
-  padding: 30px;
-  margin: 30px 0; }
-#event-details .event-details-selects {
-  width: 100%;
-  letter-spacing: 0.5px;
-  background-color: #ec9ae6;
-  padding: 20px;
-  border-radius: 4px;
-  margin: 0 0 20px 0;
-  text-align: center; }
-  #event-details .event-details-selects label {
-    font-size: 1.2em;
-    color: white; }
-  #event-details .event-details-selects select {
-    background-color: #ec9ae6;
-    color: white;
-    margin-right: 15px;
-    border: 2px #dcf9fe solid; }
-  #event-details .event-details-selects select:hover {
-    background-color: #c2f4fe;
-    color: #555; }
-#event-details #event-category-chosen {
-  margin: -10px 0 50px 0; }
-  #event-details #event-category-chosen h5 {
-    float: left;
-    background-color: #c2f4fe;
-    padding: 20px;
-    border-radius: 4px; }
-  #event-details #event-category-chosen div {
-    background-color: #c2f4fe;
-    padding: 20px;
-    border-radius: 4px;
-    min-height: 70px; }
-#event-details #img1, #event-details #img2, #event-details #img3, #event-details #img4 {
-  z-index: 1;
-  width: 70px;
-  position: fixed;
-  opacity: 0.5;
-  border-radius: 100%; }
-#event-details #img1 {
-  top: 0%;
-  left: 0%; }
-#event-details #img2 {
-  top: 0%;
-  right: 0%; }
-#event-details #img3 {
-  bottom: 0%;
-  left: 0%; }
-#event-details #img4 {
-  bottom: 0%;
-  right: 0%; }
-#event-details .images {
-  background-color: #ec9ae6 !important; }
-  #event-details .images h5 {
-    width: 100%; }
-  #event-details .images .event_images {
-    text-align: center;
-    display: block;
-    width: 100%; }
-    #event-details .images .event_images img {
-      margin: 20px 0 20px 20px; }
-    #event-details .images .event_images .delete_event_image {
-      margin-right: 50px; }
+.site-event-details {
+  background-color: rgba(194, 244, 254, 0.7);
+  padding: 5px 60px;
+  border-radius: 4px; }
+  .site-event-details ul.pagination {
+    margin-top: 50px; }
+  .site-event-details pre {
+    margin-top: 30px; }
+    .site-event-details pre.event-description {
+      font-size: 1.1em; }
 
 .btn-confirm {
   color: #ffedc4;

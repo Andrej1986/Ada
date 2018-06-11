@@ -22,7 +22,7 @@ use yii\helpers\Url;
 class EventController extends Controller
 {
 	public $name;
-	public $description;
+	public $name_id;
 	public $category;
 	public $paid;
 	public $at;
@@ -96,10 +96,11 @@ class EventController extends Controller
 	 */
 	public function actionCreate()
 	{
-		if ((new Event())->load(Yii::$app->request->post())) {
+		$model = new Event();
+		if (($model)->load(Yii::$app->request->post())) {
 			$request_data       = Yii::$app->request;
+			$this->name_id      = Name::findOne(['name' => $request_data->post('Event')['name']])['id'];
 			$this->name         = $request_data->post('Event')['name'];
-			$this->description  = $request_data->post('Event')['description'];
 			$this->category     = $request_data->post('Event')['category'];
 			$this->paid         = $request_data->post('Event')['paid'];
 			$this->at           = $request_data->post('Event')['at'];
@@ -111,16 +112,16 @@ class EventController extends Controller
 
 			if ($this->repeat_event && $this->repeat >= 1) {
 				for ($i = 1; $i <= $this->repeat; $i++) {
-					$model              = new Event();
-					$model->date        = date('Y-m-d', strtotime($this->date));
-					$model->description = $this->description;
-					$model->name        = $this->name;
-					$model->category    = $this->category;
-					$model->paid        = $this->paid;
-					$model->at          = $this->at;
-					$model->location    = $this->location;
-					$model->price       = $this->price;
-					$model->day = $model->tranformEnglishDaysToSlovak(date('D', strtotime($this->date))) ;
+					$model           = new Event();
+					$model->date     = date('Y-m-d', strtotime($this->date));
+					$model->name     = $this->name;
+					$model->name_id  = $this->name_id;
+					$model->category = $this->category;
+					$model->paid     = $this->paid;
+					$model->at       = $this->at;
+					$model->location = $this->location;
+					$model->price    = $this->price;
+					$model->day      = $model->tranformEnglishDaysToSlovak(date('D', strtotime($this->date)));
 
 
 					$this->date = date('Y-m-d', strtotime($this->date . '+ 7 days'));
@@ -132,15 +133,18 @@ class EventController extends Controller
 					return $this->redirect(Url::to(['event/index']));
 				}
 			}
-		}
+			$model           = new Event();
+			$model->date     = date('Y-m-d', strtotime($this->date));
+			$model->name     = $this->name;
+			$model->name_id  = $this->name_id;
+			$model->category = $this->category;
+			$model->paid     = $this->paid;
+			$model->at       = $this->at;
+			$model->location = $this->location;
+			$model->price    = $this->price;
+			$model->day      = $model->tranformEnglishDaysToSlovak(date('D', strtotime($this->date)));
 
-		$model = new Event();
-		$request_data = Yii::$app->request;
-		if ($model->load($request_data->post())) {
-			$model->date = date('Y-m-d', strtotime($model->date));
-			$model->day = $model->tranformEnglishDaysToSlovak(date('D', strtotime($model->date))) ;
-
-			if ($model->save()) {
+			if ($model->validate() && $model->save()) {
 				return $this->redirect(['view', 'id' => $model->id]);
 			}
 		}
@@ -186,21 +190,21 @@ class EventController extends Controller
 
 	public function actionDeleteMore()
 	{
-		$request_data       = Yii::$app->request;
-		$this->name         = $request_data->post('Event')['name'];
-		$this->category     = $request_data->post('Event')['category'];
-		$this->paid         = $request_data->post('Event')['paid'];
-		$this->at           = $request_data->post('Event')['at'];
-		$this->location     = $request_data->post('Event')['location'];
-		$this->price        = $request_data->post('Event')['price'];
+		$request_data   = Yii::$app->request;
+		$this->name     = $request_data->post('Event')['name'];
+		$this->category = $request_data->post('Event')['category'];
+		$this->paid     = $request_data->post('Event')['paid'];
+		$this->at       = $request_data->post('Event')['at'];
+		$this->location = $request_data->post('Event')['location'];
+		$this->price    = $request_data->post('Event')['price'];
 
 		$models = Event::find()
-			->where(['name'=>$this->name, 'category' => $this->category,
-					 'paid' => $this->paid, 'at' => $this->at,
+			->where(['name'     => $this->name, 'category' => $this->category,
+					 'paid'     => $this->paid, 'at' => $this->at,
 					 'location' => $this->location, 'price' => $this->price])->all();
 
-		if ($models){
-			foreach ($models as	$model){
+		if ($models) {
+			foreach ($models as $model) {
 				$model->delete();
 			}
 
@@ -208,10 +212,10 @@ class EventController extends Controller
 		}
 
 		return $this->render('delete_more', [
-			'model' => new Event(),
+			'model'        => new Event(),
 			'dataCategory' => ArrayHelper::map(Category::find()->asArray()->all(), 'name', 'name'),
-			'dataPaid' => ArrayHelper::map(Paid::find()->asArray()->all(), 'paid', 'paid'),
-			'dataName' => ArrayHelper::map(Name::find()->asArray()->all(), 'name', 'name'),
+			'dataPaid'     => ArrayHelper::map(Paid::find()->asArray()->all(), 'paid', 'paid'),
+			'dataName'     => ArrayHelper::map(Name::find()->asArray()->all(), 'name', 'name'),
 			'dataLocation' => ArrayHelper::map(Location::find()->asArray()->all(), 'name', 'name'),
 		]);
 	}

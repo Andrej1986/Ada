@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			],
             [
 				'url'   => Url::to(['/location/index']),
-				'label' => 'Miesto',
+				'label' => 'Miesta',
 				'icon'  => 'home'
 			],
 			[

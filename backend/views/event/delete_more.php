@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = 'Vymazať';
 		<?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
-			<?= Html::submitButton('Uložiť', ['class' => 'btn btn-success']) ?>
+			<?= Html::submitButton('Potvrdiť', ['class' => 'btn btn-success']) ?>
         </div>
 		<?php ActiveForm::end(); ?>
 

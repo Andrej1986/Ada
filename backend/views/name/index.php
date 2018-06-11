@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title                   = 'Názvy';
+$this->title                   = 'Globálne Eventy';
 $this->params['breadcrumbs'][] = ['label' => 'Globálne Eventy', 'url' => ['event/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

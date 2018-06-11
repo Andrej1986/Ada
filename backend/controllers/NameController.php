@@ -62,7 +62,7 @@ class NameController extends Controller
 
 		return $this->render('view', [
 			'model' => $model,
-			'image' => $image??'',
+			'image' => $image ?? '',
 		]);
 	}
 
@@ -126,7 +126,13 @@ class NameController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		if (is_dir(Yii::$app->basePath . "/web/uploads/main/" . $this->findModel($id)['name'])) {
+			array_map('unlink', glob(Yii::$app->basePath . "/web/uploads/main/" . $this->findModel($id)['name'] . '*/*'));
+			rmdir(Yii::$app->basePath . "/web/uploads/main/" . $this->findModel($id)['name']);
+		}
+
 		$this->findModel($id)->delete();
+
 
 		return $this->redirect(['index']);
 	}

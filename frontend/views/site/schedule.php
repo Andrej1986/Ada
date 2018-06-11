@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Program';
+$this->title = 'Program - najbližších 20 Eventov ';
 
 ?>
 <div class="site-schedule">
@@ -16,7 +16,7 @@ $this->title = 'Program';
             <th scope="col">Deň</th>
             <th scope="col">Dátum</th>
             <th scope="col">Event</th>
-            <th scope="col">Hodnotenie</th>
+<!--            <th scope="col">Hodnotenie</th>-->
         </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@ $this->title = 'Program';
                 <td><?= $event['day'] ?></td>
                 <td><?=  date('d.m.Y', strtotime($event['date']))  ?></td>
                 <td><?= $event['name'] ?></td>
-                <td>***</td>
+<!--                <td>***</td>-->
             </tr>
 		<?php endforeach; ?>
         </tbody>

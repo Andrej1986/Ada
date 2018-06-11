@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\Comment;
 use Yii;
 
 /**
@@ -35,11 +36,13 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date', 'price', 'name', 'at','category', 'paid', 'location'], 'required'],
+            [['date', 'price', 'name', 'at','category', 'paid', 'location', 'name_id'], 'required'],
+			[['name_id'], 'integer'],
 //            [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['name', 'category', 'paid', 'at', 'location'], 'string', 'max' => 255],
             [['day'], 'string', 'max' => 10],
             [['price'], 'number', 'max' => 100],
+			[['name_id'], 'exist', 'skipOnError' => true, 'targetClass' => Name::className(), 'targetAttribute' => ['name_id' => 'id']],
         ];
     }
 
@@ -51,6 +54,7 @@ class Event extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Názov',
+            'name_id' => 'Názov id',
             'category' => 'Kategória',
             'paid' => 'Platené?',
             'day' => 'Deň',

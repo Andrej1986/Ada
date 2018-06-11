@@ -121,6 +121,7 @@ a.desc:after {
 
 .event {
   border: 15px solid white;
+  border-radius: 20px;
   padding: 20px;
   height: 600px;
   background-color: transparentize($primary-color1, 0.2);
@@ -135,11 +136,12 @@ a.desc:after {
 }
 
 .site-index{
-  .pre{
+  pre{
     overflow: hidden;
   }
   .img-main-page{
     height: 250px;
     width: auto;
+    border-radius: 8%;
   }
 }
