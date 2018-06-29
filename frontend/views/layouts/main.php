@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link href="https://fonts.googleapis.com/css?family=Itim&amp;subset=latin-ext" rel="stylesheet">
 </head>
 <body>
 <?php $this->beginBody() ?>

@@ -1,5 +1,5 @@
 .site-event-details{
-  background-color: transparentize($primary-color1, 0.3) ;
+  background-color: transparentize($primary-color1, 0.8) ;
   padding: 5px 60px;
   border-radius: $border-radius1;
 
@@ -12,5 +12,10 @@
     &.event-description{
       font-size: 1.1em;
     }
+  }
+
+  img:hover{
+    transform: scale(1.02);
+    transition: transform 0.2s linear;
   }
 }

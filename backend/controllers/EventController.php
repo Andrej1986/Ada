@@ -27,6 +27,7 @@ class EventController extends Controller
 	public $paid;
 	public $at;
 	public $location;
+	public $address;
 	public $date;
 	public $repeat_event;
 	public $repeat;
@@ -105,6 +106,7 @@ class EventController extends Controller
 			$this->paid         = $request_data->post('Event')['paid'];
 			$this->at           = $request_data->post('Event')['at'];
 			$this->location     = $request_data->post('Event')['location'];
+			$this->address     = $request_data->post('Event')['address'];
 			$this->date         = $request_data->post('Event')['date'];
 			$this->repeat_event = $request_data->post('repeat-event');
 			$this->repeat       = $request_data->post('repeat');
@@ -120,6 +122,7 @@ class EventController extends Controller
 					$model->paid     = $this->paid;
 					$model->at       = $this->at;
 					$model->location = $this->location;
+					$model->address = $this->address;
 					$model->price    = $this->price;
 					$model->day      = $model->tranformEnglishDaysToSlovak(date('D', strtotime($this->date)));
 
@@ -141,6 +144,7 @@ class EventController extends Controller
 			$model->paid     = $this->paid;
 			$model->at       = $this->at;
 			$model->location = $this->location;
+			$model->address = $this->address;
 			$model->price    = $this->price;
 			$model->day      = $model->tranformEnglishDaysToSlovak(date('D', strtotime($this->date)));
 

@@ -1,8 +1,11 @@
 body{
-  min-height: 100vh;
+  min-height: 105vh;
   color: $font-color;
     background-color: darken(#fff, 0);
     background-image: url("../images/Sports.png");
+  //font-family: 'Caveat Brush', cursive, sans-serif;
+  font-family: 'Itim', cursive, sans-serif;
+  font-size: 18px;
     //background-repeat: repeat;
 }
 

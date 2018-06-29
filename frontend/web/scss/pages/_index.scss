@@ -120,26 +120,29 @@ a.desc:after {
 }
 
 .event {
-  border: 15px solid white;
+  border: 1px solid $primary-color1;
   border-radius: 20px;
   padding: 20px;
   height: 600px;
-  background-color: transparentize($primary-color1, 0.2);
+  background-color: transparentize($primary-color1, 0.9);
 
   a {
     color: $primary-color2;
+    display: inline-block;
     &:hover {
       text-decoration: none;
       color: darken($primary-color2, 20%);
+      transform: scale(1.2);
+      transition: transform .3s;
     }
   }
 }
 
-.site-index{
-  pre{
+.site-index {
+  pre {
     overflow: hidden;
   }
-  .img-main-page{
+  .img-main-page {
     height: 250px;
     width: auto;
     border-radius: 8%;

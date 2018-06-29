@@ -1,11 +1,16 @@
 nav.navbar{
-  background-color: darken($primary-color1, 15%)!important;
+  background-color: darken($primary-color1, 45%)!important;
   //border-radius: $border-radius1;
   a{
-    color: darken($primary-color1, 60%)  !important;
+    color: white  !important;
   }
 
   .active a{
     background-color: lighten($primary-color2, 10%)  !important;
   }
+}
+
+
+.navbar-inverse{
+  border:none;
 }

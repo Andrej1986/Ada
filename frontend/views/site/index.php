@@ -126,5 +126,3 @@ function getFilteredEvents(){
 ", yii\web\View::POS_END);
 	?>
 
-
-

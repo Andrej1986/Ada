@@ -36,10 +36,10 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date', 'price', 'name', 'at','category', 'paid', 'location', 'name_id'], 'required'],
+            [['date', 'price', 'name', 'at','category', 'paid', 'location','address', 'name_id'], 'required'],
 			[['name_id'], 'integer'],
 //            [['date'], 'date', 'format' => 'php:Y-m-d'],
-            [['name', 'category', 'paid', 'at', 'location'], 'string', 'max' => 255],
+            [['name', 'category', 'paid', 'at', 'location', 'address'], 'string', 'max' => 255],
             [['day'], 'string', 'max' => 10],
             [['price'], 'number', 'max' => 100],
 			[['name_id'], 'exist', 'skipOnError' => true, 'targetClass' => Name::className(), 'targetAttribute' => ['name_id' => 'id']],
@@ -60,6 +60,7 @@ class Event extends \yii\db\ActiveRecord
             'day' => 'Deň',
             'at' => 'O koľkej',
             'location' => 'Miesto',
+            'address' => 'Adresa',
             'date' => 'Dátum',
             'price' => 'Cena (eur/h)',
         ];

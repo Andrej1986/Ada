@@ -26,7 +26,7 @@ class Location extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'address'], 'required'],
             [['name'], 'string', 'max' => 100],
         ];
     }
@@ -39,6 +39,7 @@ class Location extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Názov',
+            'address' => 'Adresa',
         ];
     }
 }

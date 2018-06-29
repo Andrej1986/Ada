@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use backend\models\Name;
 use common\models\Comment;
 use frontend\models\Event;
+use frontend\models\File;
 use frontend\models\Paid;
 use Yii;
 use yii\base\InvalidParamException;
@@ -83,6 +84,9 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		Yii::$app->session->set('paid', 'Všetky');
+		Yii::$app->session->set('category', 'Všetky');
+		Yii::$app->session->set('when', 'Všetky');
 		return $this->render('index', [
 			'category'     => new Category(),
 			'dataCategory' => (new Category())->selectUsedCategories(),
@@ -175,18 +179,20 @@ class SiteController extends Controller
 		$query      = Comment::find()->where(['name_id' => $event['id']]);
 		$pagination = new Pagination(['totalCount' => $query->count(), 'defaultPageSize' => 10]);
 
-		if (is_dir('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name")) {
-			$images = FileHelper::findFiles('/Users/andrejsoukup/yii' . Yii::$app->urlManagerBackend->baseUrl . "/uploads/$name", ['only' => ['*.jpg', '*.png']]);
-		}
-
 		return $this->render('event', [
 			'event'      => $event,
-			'images'     => $images ?? '',
+			'images'     => (new File())->imagesByEventName($name),
 			'name'       => $name,
 			'i'          => 0,
 			'model'      => new Comment(),
-			'comments'   => $query->offset($pagination->offset)->limit($pagination->limit)->all(),
-			'pagination' => $pagination
+			'comments'   => $query->offset($pagination->offset)->limit($pagination->limit)->orderBy('id desc')->all(),
+			'pagination' => $pagination,
+			'addresses'    => (new Event())->findLocationAddressByNameCatetoryPaidDay(
+				$name,
+				Yii::$app->session->get('category'),
+				Yii::$app->session->get('paid'),
+				Yii::$app->session->get('when')
+				),
 		]);
 	}
 

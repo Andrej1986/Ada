@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'dataPaid' => ArrayHelper::map(Paid::find()->asArray()->all(), 'paid', 'paid'),
 		'dataName' => ArrayHelper::map(Name::find()->asArray()->all(), 'name', 'name'),
 		'dataLocation' => ArrayHelper::map(Location::find()->asArray()->all(), 'name', 'name'),
+		'dataAddress' => ArrayHelper::map(Location::find()->asArray()->all(), 'address', 'address'),
 
 	]) ?>
 

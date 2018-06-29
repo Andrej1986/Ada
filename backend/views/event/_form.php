@@ -30,9 +30,10 @@ use yii\widgets\ActiveForm;
 	]); ?>
 
 	<?= $form->field($model, 'location')->dropDownList($dataLocation, ['prompt' => '']) ?>
+	<?= $form->field($model, 'address')->dropDownList($dataAddress, ['prompt' => '']) ?>
 
 	<?= $form->field($model, 'date')->widget(TimePicker::className(), [
-		'language'      => 'sk',
+//		'language'      => 'sk',
 		'mode'          => 'date',
 		'clientOptions' => [
 			'dateFormat' => 'dd.mm.yy',

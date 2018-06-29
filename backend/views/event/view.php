@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'day',
             'at',
             'location',
+            'address',
 			[
 				'attribute' => 'date',
 				'value' => function($data){
