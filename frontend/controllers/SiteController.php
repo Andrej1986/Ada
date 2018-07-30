@@ -84,16 +84,16 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$model = new Event();
 		Yii::$app->session->set('paid', 'Všetky');
 		Yii::$app->session->set('category', 'Všetky');
 		Yii::$app->session->set('when', 'Všetky');
 		return $this->render('index', [
-			'category'     => new Category(),
+			'model'        => $model,
 			'dataCategory' => (new Category())->selectUsedCategories(),
-			'paid'         => new Paid(),
-			'dataPaid'     => Paid::findByCategory(),
-			'event'        => new Event(),
 			'dataEvent'    => array_unique(ArrayHelper::map(Event::find()->asArray()->all(), 'id', 'name')),
+			'dataPaid'     => Paid::findByCategory(),
+			'dataLocation'    => array_unique(ArrayHelper::map(Event::find()->asArray()->all(), 'id', 'name')),
 		]);
 	}
 

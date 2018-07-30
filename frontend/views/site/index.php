@@ -18,110 +18,90 @@ $this->title = 'Eventy pre deti';
 			'id'      => 'select-event-form',
 			'options' => ['class' => 'form-horizontal'],
 		]) ?>
-        <div class="col-sm-3 category">
-			<?= $form->field($category, 'name')->dropDownList($dataCategory, ['onchange' => 'getFilteredEvents(), setPaidValues(), setWhenValues()', 'prompt' => 'Všetky'])->label('Kategórie') ?>
+        <div class="category">
+			<?= $form->field($model, 'category')->dropDownList($dataCategory, ['onchange' => 'setActivityValues(),  setWhenValues(), setPaidValues(), setLocationValues()', 'prompt' => 'Všetky'])->label('Kategórie') ?>
         </div>
-        <div class="col-sm-offset-1 col-sm-3 paid">
-			<?= $form->field($paid, 'paid')->dropDownList($dataPaid, ['onchange' => 'getFilteredEvents(), setWhenValues()', 'prompt' => 'Všetky'])->label('Platené?') ?>
+        <div class="activity">
+			<?= $form->field($model, 'name')->dropDownList($dataEvent, ['onchange' => ' setWhenValues(), setPaidValues(), setLocationValues()', 'prompt' => 'Všetky'])->label('Aktivita') ?>
         </div>
-        <div class="col-sm-offset-1 col-sm-3 when">
-			<?= $form->field($event, 'day')->dropDownList(['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa'], ['onchange' => 'getFilteredEvents()', 'prompt' => 'Všetky'])->label('Kedy') ?>
+        <div class="when">
+			<?= $form->field($model, 'day')->dropDownList(['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota', 'Nedeľa'], ['onchange' => 'setPaidValues(), setLocationValues()', 'prompt' => 'Všetky'])->label('Kedy') ?>
         </div>
-        <div class="clearfix"></div>
-    </div>
-
-
-    <div class="clearfix"></div>
-
-
-    <div class="all-events">
-        <div class="ajax-data">
-			<?php $i = 0; ?>
-			<?php foreach ($dataEvent as $event): ?>
-                <div class="col-sm-6 event">
-                    <h2><a href="<?= Url::to(['/site/event', 'name' => $event]) ?>"><?= $event ?></a></h2>
-                    <pre><?php
-						if (strlen(Name::findOne(['name' => $event])->description) >= 200) {
-							$pos = strpos(Name::findOne(['name' => $event])->description, ' ', 200);
-							echo substr(Name::findOne(['name' => $event])->description, 0, $pos) . '...' .
-								Html::a('viac', Url::to(['/site/event/', 'name' => $event]));
-						} else {
-							echo Name::findOne(['name' => $event])->description;
-						}
-						?>
-                    </pre>
-
-						<?php
-						if (is_dir("/Users/andrejsoukup/yii/Ada/backend/web/uploads/main/$event/")) {
-							$image = FileHelper::findFiles("/Users/andrejsoukup/yii/Ada/backend/web/uploads/main/$event/", ['only' => ['*.jpg', '*.png']]) ?? '';
-						} else {
-							$image = '';
-						}
-						?>
-						<?php if (!empty($image)): ?>
-							<?php
-							$explodeImg = explode('/', $image[0]);
-							$imgName    = end($explodeImg);
-							echo Html::img("/Ada/backend/web/uploads/main/$event/" . $imgName, ['class' => 'pull-left img-responsive img-main-page col-sm-6']);
-							?>
-						<?php endif; ?>
-                </div>
-
-				<?php
-				$i++;
-				if ($i % 2 == 0) {
-					echo '<div class="clearfix"></div><hr>';
-				}
-				?>
-
-			<?php endforeach; ?>
+        <div class="paid">
+			<?= $form->field($model, 'paid')->dropDownList($dataPaid, ['onchange' => ' setLocationValues()', 'prompt' => 'Všetky'])->label('Platené?') ?>
+        </div>
+        <div class="town">
+			<?= $form->field($model, 'location')->dropDownList($dataCategory, ['prompt' => 'Všetky'])->label('Miesto') ?>
         </div>
     </div>
-    <div class="cleearfix"></div>
+
+    <div class="form-group">
+		<?= Html::submitButton('Potvrdiť výber', ['class' => 'btn btn-lg btn-success']) ?>
+    </div>
+
+	<?php ActiveForm::end() ?>
 
 	<?php
 	$this->registerJs("
 	
-function getFilteredEvents(){
-    let category = $('.category select :selected').text(),
-        paid = $('.paid select :selected').text(),
-        when = $('.when select :selected').text();
+function setActivityValues(){
+    let category = $('.category select :selected').text();
+    let activity = $('.activity select :selected').text();
         $.ajax({
-           url: \"" . Url::to(['ajax/filtered-events']) . "\",
-           data: {category: category, paid:paid, when:when},
+           url: \"" . Url::to(['ajax/set-activity-values']) . "\",
+           data: {category: category, activity:activity},
            type: 'GET',
            success: function(data){
-               $(\".ajax-data\").html(data);
+               $(\".container .activity\").html(data);
            }
        })
     }
-   
- function setPaidValues(){
-    let category = $('.category select :selected').text(),
-            paid = $('.paid select :selected').text();
-        $.ajax({
-           url: \"" . Url::to(['ajax/set-paid-values']) . "\",
-           data: {category: category, paid:paid},
-           type: 'GET',
-           success: function(data){
-               $(\".container .paid\").html(data);
-           }
-       })
-   }   
-   
+    
  function setWhenValues(){
     let category = $('.category select :selected').text(),
-            paid = $('.paid select :selected').text(),
-            when = $('.when select :selected').text();
+        activity = $('.activity select :selected').text(),
+        when = $('.when select :selected').text();
         $.ajax({
            url: \"" . Url::to(['ajax/set-when-values']) . "\",
-           data: {category: category, paid:paid, when:when},
+           data: {category: category, activity:activity, when:when},
            type: 'GET',
            success: function(data){
                $(\".container .when\").html(data);
            }
        })
    }
+   
+ function setPaidValues(){
+    let category = $('.category select :selected').text(),
+        activity = $('.activity select :selected').text(),
+        when = $('.when select :selected').text(),
+        paid = $('.paid select :selected').text();
+        $.ajax({
+           url: \"" . Url::to(['ajax/set-paid-values']) . "\",
+           data: {category: category, activity:activity, when:when, paid:paid},
+           type: 'GET',
+           success: function(data){
+               $(\".container .paid\").html(data);
+           }
+       })
+   }   
+
+ function setLocationValues(){
+    let category = $('.category select :selected').text(),
+        activity = $('.activity select :selected').text(),
+        when = $('.when select :selected').text(),
+        paid = $('.paid select :selected').text(),
+        location = $('.town select :selected').text();
+        $.ajax({
+           url: \"" . Url::to(['ajax/set-location-values']) . "\",
+           data: {category: category, activity:activity, when:when, paid:paid, location:location},
+           type: 'GET',
+           success: function(data){
+               $(\".container .town\").html(data);
+           }
+       })
+   }   
+
     
 ", yii\web\View::POS_END);
 	?>

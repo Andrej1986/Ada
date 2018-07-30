@@ -8,4 +8,11 @@ ob_get_clean();
 
 ?>
 
-<?= $form->field($event, 'day')->dropDownList($when_values, ['onchange' => 'getFilteredEvents()', 'prompt' => $when])->label('Kedy') ?>
+
+<?php if ($when_values): ?>
+	<?= $form->field($model, 'day')->dropDownList($when_values, ['onchange' => 'setPaidValues(), setLocationValues()', 'prompt' => $when])->label('Kedy') ?>
+<?php endif; ?>
+
+<?php if (!$when_values): ?>
+	<?= $form->field($model, 'day')->dropDownList($when_values, ['onchange' => 'setPaidValues(), setLocationValues()', 'prompt' => $when])->label('Kedy') ?>
+<?php endif; ?>

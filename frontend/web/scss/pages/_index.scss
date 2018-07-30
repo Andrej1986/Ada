@@ -3,6 +3,8 @@ body {
   height: 100%;
 }
 
+
+
 .wrap {
   min-height: 100%;
   height: auto;
@@ -146,5 +148,10 @@ a.desc:after {
     height: 250px;
     width: auto;
     border-radius: 8%;
+  }
+
+  .category, .paid, .when, .activity, .town{
+    width: 50%;
+    margin: 50px auto;
   }
 }

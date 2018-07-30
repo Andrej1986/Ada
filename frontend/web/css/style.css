@@ -211,6 +211,9 @@ a.desc:after {
   height: 250px;
   width: auto;
   border-radius: 8%; }
+.site-index .category, .site-index .paid, .site-index .when, .site-index .activity, .site-index .town {
+  width: 50%;
+  margin: 50px auto; }
 
 .site-schedule {
   padding: 5px 60px;
